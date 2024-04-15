@@ -1,0 +1,31 @@
+---
+environments:
+  "{{ .Environment.Name }}": {}
+---
+releases:
+  - name: arc-systems
+    namespace: arc-systems
+    chart: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+    version: 0.9.0
+    # values:
+    #   - values-arc-systems-{{ .Environment.Name }}.yaml
+    # secrets:
+    #   - secrets-arc-systems-{{ .Environment.Name }}.yaml
+
+  - name: arc-runner-set
+    namespace: arc-runners
+    chart: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+    version: 0.9.0
+    values:
+      - values-arc-runner-set-{{ .Environment.Name }}.yaml
+    # secrets:
+    #   - secrets-arc-runner-set-{{ .Environment.Name }}.yaml
+    #
+# GITHUB_CONFIG_URL="https://github.com/<your_enterprise/org/repo>"
+# GITHUB_PAT="<PAT>"
+# helm install "${INSTALLATION_NAME}" \
+#     --namespace "${NAMESPACE}" \
+#     --create-namespace \
+#     --set githubConfigUrl="${GITHUB_CONFIG_URL}" \
+#     --set githubConfigSecret.github_token="${GITHUB_PAT}" \
+#     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
