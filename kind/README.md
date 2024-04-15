@@ -2,6 +2,10 @@
 
 ## Create K8s cluster
 ```bash
+❯ cd kind
+
+❯ export .envrc
+
 ❯ kind create cluster --config=config.yaml
 Creating cluster "github-arc-poc" ...
  ✓ Ensuring node image (kindest/node:v1.27.3) 🖼
