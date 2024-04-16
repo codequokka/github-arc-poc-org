@@ -6,6 +6,9 @@
 
 ❯ export .envrc
 
+❯ kind version
+kind v0.20.0 go1.20.4 linux/amd64
+
 ❯ kind create cluster --config=config.yaml
 Creating cluster "github-arc-poc" ...
  ✓ Ensuring node image (kindest/node:v1.27.3) 🖼

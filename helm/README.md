@@ -9,6 +9,17 @@
 ❯ helm version
 version.BuildInfo{Version:"v3.14.4", GitCommit:"81c902a123462fd4052bc5e9aa9c513c4c8fc142", GitTreeState:"clean", GoVersion:"go1.21.9"}
 
+❯ helm plugin install https://github.com/databus23/helm-diff
+<omit>
+
+❯ helm plugin install https://github.com/jkroepke/helm-secrets
+<omit>
+
+❯ helm plugin list
+NAME    VERSION         DESCRIPTION
+diff    3.9.5           Preview helm upgrade changes as a diff
+secrets 4.6.1-dev       This plugin provides secrets values encryption for Helm charts secure storing
+
 ❯ helmfile version
 
 ▓▓▓ helmfile
@@ -22,11 +33,16 @@ version.BuildInfo{Version:"v3.14.4", GitCommit:"81c902a123462fd4052bc5e9aa9c513c
   Compiler           gc
   Platform           linux/amd64
 
-❯ kubectl create namespace arc-runners
-namespace/arc-runners created
+❯ age-keygen -o key.txt
+Public key: <your-public-key>
 
-❯ kubectl -n arc-runners create secret generic pre-defined-secret --from-literal=github_token='<your-pat>'
-secret/pre-defined-secret created
+
+❯ vi .sops.yaml
+---
+creation_rules:
+  - age: <your-public-key>
+
+❯ helm secrets encrypt -i github-arc/secrets-arc-runner-set-poc.yaml
 
 ❯ helmfile diff -e $HELM_ENVIRONMENT
 
