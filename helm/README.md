@@ -1,6 +1,7 @@
-# Kind
+# Helm
 
-## Deploy github ARC
+## How to deploy
+- Check deployment prerequisite
 ```bash
 ❯ cd helm
 
@@ -32,24 +33,40 @@ secrets 4.6.1-dev       This plugin provides secrets values encryption for Helm 
   Go version         1.22.1
   Compiler           gc
   Platform           linux/amd64
+```
 
+- Create your encryption key
+```bash
 ❯ age-keygen -o key.txt
 Public key: <your-public-key>
-
 
 ❯ vi .sops.yaml
 ---
 creation_rules:
   - age: <your-public-key>
+```
 
-❯ helm secrets encrypt -i github-arc/secrets-arc-runner-set-poc.yaml
+- Set your Github repo
+```bash
+❯ sops github-arc/values-arc-runner-set-poc.yaml
+githubConfigUrl: https://github.com/<your-github-user>/<your-github-repo>
+```
 
+- Set your Github PAT
+```bash
+❯ sops github-arc/secrets-arc-runner-set-poc.yaml
+githubConfigSecret:
+    github_token: <your-github-pat>
+```
+
+- Deploy github ARC with helmfile
+```bash
 ❯ helmfile diff -e $HELM_ENVIRONMENT
 
 ❯ helmfile apply -e $HELM_ENVIRONMENT
 ```
 
-## Check github ARC is deployed
+- Check github ARC is deployed
 ```bash
 ❯ kubectl get pods -n arc-systems
 NAME                                             READY   STATUS    RESTARTS   AGE
