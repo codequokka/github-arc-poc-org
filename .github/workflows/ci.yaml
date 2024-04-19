@@ -22,4 +22,4 @@ jobs:
 
       - name: Run lint
         working-directory: script
-        run: ruff check --output-format=github
+        run: python -m ruff check --output-format=github
