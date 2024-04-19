@@ -18,8 +18,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: script
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-dev.txt
 
       - name: Run lint
         working-directory: script
-        run: python -m ruff check --output-format=github
+        run: ruff check --output-format=github
