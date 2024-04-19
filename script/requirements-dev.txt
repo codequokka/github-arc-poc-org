@@ -8,5 +8,6 @@ mypy
 ruff
 pytest
 pytest-cov
+pytest-github-actions-annotate-failures
 poethepoet
 types-requests
