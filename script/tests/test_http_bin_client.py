@@ -13,7 +13,7 @@ def mock_http_bin_client() -> Mock:
 @patch("mymodule.lib.http_bin_client.HttpBinClient.get_ip")
 def test_get_ip_success(mock_http_bin_client: Mock) -> None:
     want = {"origin": "127.0.0.1"}
-    mock_http_bin_client.return_value = {"origin": "127.0.0.2"}
+    mock_http_bin_client.return_value = want
 
     client = HttpBinClient()
     got = client.get_ip()
