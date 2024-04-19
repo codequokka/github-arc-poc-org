@@ -5,7 +5,6 @@ from requests import Response
 
 
 def get_ip() -> Response:
-    unused_var = ""
     client = HttpBinClient()
     response = client.get_ip()
     return response
