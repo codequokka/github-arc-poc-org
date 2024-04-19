@@ -23,3 +23,7 @@ jobs:
       - name: Run lint
         working-directory: script
         run: ruff check --output-format=github
+
+      - name: Run test
+        working-directory: script
+        run: pytest -v
