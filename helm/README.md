@@ -1,11 +1,11 @@
-# Helm
+# Deploy the Github ARC
 
 ## How to deploy
 - Check deployment prerequisites
 ```bash
 ❯ cd helm
 
-❯ export .envrc
+❯ source .envrc
 
 ❯ helm version
 version.BuildInfo{Version:"v3.14.4", GitCommit:"81c902a123462fd4052bc5e9aa9c513c4c8fc142", GitTreeState:"clean", GoVersion:"go1.21.9"}
@@ -28,9 +28,6 @@ v1.1.1
 
 ❯ age-keygen --version
 v1.1.1
-
-❯ sops --version
-sops 3.8.1 (latest)
 ```
 
 - Install helm plugins
@@ -51,11 +48,6 @@ secrets 4.6.1-dev       This plugin provides secrets values encryption for Helm 
 ```bash
 ❯ age-keygen -o key.txt
 Public key: <your-public-key>
-
-❯ vi .sops.yaml
----
-creation_rules:
-  - age: <your-public-key>
 ```
 
 - Set your Github repo
@@ -69,12 +61,18 @@ githubConfigUrl: https://github.com/<your-github-user>/<your-github-repo>
 
 - Set your Github PAT
 ```bash
-❯ sops github-arc/secrets-arc-runner-set-poc.yaml
+❯ rm github-arc/secrets-arc-runner-set-poc.yaml
+
+❯ vi github-arc/secrets-arc-runner-set-poc.yaml
 ```
 
 ```yaml
 githubConfigSecret:
     github_token: <your-github-pat>
+```
+
+```bash
+❯ helm secrets encrypt -i github-arc/secrets-arc-runner-set-poc.yaml
 ```
 
 - Deploy github ARC with helmfile
@@ -93,6 +91,9 @@ NAME                                             READY   STATUS    RESTARTS   AG
 arc-runner-set-754b578d-listener                 1/1     Running   0          3m24s
 arc-systems-gha-rs-controller-547c844bc9-mb2fq   1/1     Running   0          34m
 ```
+
+![](./docs/images/check-arc-runner-set-is-online.png)
+
 
 ## How to undeploy
 <!-- TODO -->
