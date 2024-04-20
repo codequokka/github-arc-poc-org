@@ -1,11 +1,11 @@
-# Kind
+# Create the K8s cluster
 
 ## How to deploy
 - Check deployment prerequisites
 ```bash
 ❯ cd kind
 
-❯ export .envrc
+❯ source .envrc
 
 ❯ docker version
 Client: Docker Engine - Community
