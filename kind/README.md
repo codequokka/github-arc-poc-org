@@ -9,21 +9,21 @@
 
 ❯ docker version
 Client: Docker Engine - Community
- Version:           26.0.1
+ Version:           26.1.1
  API version:       1.45
  Go version:        go1.21.9
- Git commit:        d260a54
- Built:             Thu Apr 11 10:54:59 2024
+ Git commit:        4cf5afa
+ Built:             Tue Apr 30 11:47:53 2024
  OS/Arch:           linux/amd64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          26.0.1
+  Version:          26.1.1
   API version:      1.45 (minimum version 1.24)
   Go version:       go1.21.9
-  Git commit:       60b9add
-  Built:            Thu Apr 11 10:53:19 2024
+  Git commit:       ac2de55
+  Built:            Tue Apr 30 11:47:53 2024
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
@@ -37,17 +37,22 @@ Server: Docker Engine - Community
   GitCommit:        de40ad0
 
 ❯ kind version
-kind v0.20.0 go1.20.4 linux/amd64
+kind v0.22.0 go1.20.13 linux/amd64
+
+❯ kubectl version
+Client Version: v1.30.0
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
 ```
 
 - Create the K8s cluster
 ```bash
-❯ kind create cluster --config=config.yaml
+❯ kind create cluster --config config.yaml
 Creating cluster "github-arc-poc" ...
- ✓ Ensuring node image (kindest/node:v1.27.3) 🖼
+ ✓ Ensuring node image (kindest/node:v1.29.2) 🖼
  ✓ Preparing nodes 📦 📦 📦
  ✓ Writing configuration 📜
- ✓ Starting control-plane 🕹️
+ ✓ Starting control-plane 🕹
  ✓ Installing CNI 🔌
  ✓ Installing StorageClass 💾
  ✓ Joining worker nodes 🚜
@@ -56,7 +61,7 @@ You can now use your cluster with:
 
 kubectl cluster-info --context kind-github-arc-poc
 
-Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/#community 🙂
+Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
 ```
 
 - Check the K8s cluster is created
@@ -66,9 +71,9 @@ github-arc-poc
 
 ❯ kubectl get nodes
 NAME                           STATUS   ROLES           AGE   VERSION
-github-arc-poc-control-plane   Ready    control-plane   78s   v1.27.3
-github-arc-poc-worker          Ready    <none>          56s   v1.27.3
-github-arc-poc-worker2         Ready    <none>          54s   v1.27.3
+github-arc-poc-control-plane   Ready    control-plane   71s   v1.29.2
+github-arc-poc-worker          Ready    <none>          48s   v1.29.2
+github-arc-poc-worker2         Ready    <none>          47s   v1.29.2
 ```
 
 ## How to undeploy
