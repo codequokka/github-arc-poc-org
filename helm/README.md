@@ -68,7 +68,7 @@ githubConfigUrl: https://github.com/<your-github-user>/<your-github-repo>
 
 ```yaml
 githubConfigSecret:
-    github_token: <your-github-pat>
+  github_token: <your-github-pat>
 ```
 
 ```bash
