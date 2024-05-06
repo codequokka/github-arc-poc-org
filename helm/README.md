@@ -48,6 +48,14 @@ secrets 4.6.1-dev       This plugin provides secrets values encryption for Helm 
 ```bash
 ❯ age-keygen -o key.txt
 Public key: <your-public-key>
+
+❯ vi .sops.yaml
+```
+
+```yaml
+---
+creation_rules:
+  - age: <your-public-key>
 ```
 
 - Set your Github repo
@@ -67,9 +75,11 @@ githubConfigUrl: https://github.com/<your-github-user>/<your-github-repo>
 ```
 
 ```yaml
+---
 githubConfigSecret:
   github_token: <your-github-pat>
 ```
+
 
 ```bash
 ❯ helm secrets encrypt -i github-arc/secrets-arc-runner-set-poc.yaml
