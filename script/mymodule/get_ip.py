@@ -2,6 +2,7 @@
 
 from lib.http_bin_client import HttpBinClient
 from requests import Response
+import json
 
 
 def get_ip() -> Response:
